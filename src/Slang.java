@@ -36,7 +36,13 @@ public class Slang {
             BufferedReader br = new BufferedReader(new FileReader(fileName));
             while ((line = br.readLine()) != null) {
                 String[] arrOfStr = line.split(splitBy);
-                data.put(arrOfStr[0], arrOfStr[1]);
+                try {
+                    System.out.println(arrOfStr[0] + "Key = " + arrOfStr[1]);
+                    data.put(arrOfStr[0], arrOfStr[1]);
+
+                } catch (Exception e) {
+                    data.put(arrOfStr[0], arrOfStr[0]);
+                }
             }
         } catch (IOException e) {
             e.printStackTrace();
