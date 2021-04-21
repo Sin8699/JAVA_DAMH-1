@@ -9,8 +9,23 @@ public class Menu {
         List<String> slangList = new ArrayList<>(data.keySet());
         List<String> definitionList = new ArrayList<>(data.values());
 
-        JPanel slangPanel = new JPanel();
-        JPanel definitionPanel = new JPanel();
+        JPanel panel = new JPanel();
+        panel.setLayout(new GridLayout(3, 4));
+
+        String[] choices = { "Slang", "Definition" };
+
+        final JComboBox<String> cb = new JComboBox<String>(choices);
+        cb.setAlignmentX(Component.LEFT_ALIGNMENT);
+        panel.add(cb);
+
+        JButton b = new JButton("Click Here");
+        b.setBounds(50, 100, 95, 30);
+        panel.add(b);
+
+        String[] countries = new String[] { "india", "australia", "newzealand", "england", "germany", "france",
+                "ireland", "southafrica", "bangladesh", "holland", "america" };
+        JComboBox comboBox = new AutoCompleteComboBox(countries);
+        panel.add(comboBox, BorderLayout.NORTH);
 
         final JList<String> slangJList = new JList(slangList.toArray());
         final JList<String> definitionJList = new JList(definitionList.toArray());
@@ -26,12 +41,13 @@ public class Menu {
         // slangPanel.setMargin(new Insets(100, 0, 0, 0));
         definitionJList.setLayoutOrientation(JList.VERTICAL);
 
-        slangPanel.add(slangScrollPane);
-        definitionPanel.add(definitionScrollPane);
+        panel.add(slangScrollPane);
+        panel.add(definitionScrollPane);
 
         JFrame frame = new JFrame("SLANG WORD");
-        frame.add(slangPanel);
-        frame.add(definitionPanel);
+
+        frame.add(panel);
+
         frame.setSize(700, 700);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
