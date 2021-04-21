@@ -1,4 +1,3 @@
-import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.plaf.basic.*;
@@ -8,7 +7,6 @@ class AutoCompleteComboBox extends JComboBox {
     public JTextField tfield = null;
 
     public AutoCompleteComboBox(final Object countries[]) {
-        super(countries);
         setEditor(new BasicComboBoxEditor());
         setEditable(true);
     }

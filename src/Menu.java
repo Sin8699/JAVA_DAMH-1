@@ -10,31 +10,36 @@ public class Menu {
         List<String> definitionList = new ArrayList<>(data.values());
 
         JPanel panel = new JPanel();
-        // panel.setLayout(new GridLayout(3, 4));
 
+        JLabel typeWord = new JLabel("Search by :", JLabel.CENTER);
         String[] choices = { "Slang", "Definition" };
 
         final JComboBox<String> cb = new JComboBox<String>(choices);
-        cb.setBounds(25, 420, 100, 40);
+        cb.setBounds(100, 420, 100, 40);
         panel.add(cb);
+        typeWord.setBounds(28, 417, 70, 40);
+        panel.add(typeWord);
 
         JButton addCta = new JButton("Add +");
-        addCta.setBounds(360, 50, 95, 30);
+        addCta.setBounds(360, 20, 95, 30);
         panel.add(addCta);
 
         JButton editCta = new JButton("Edit");
-        editCta.setBounds(470, 50, 95, 30);
+        editCta.setBounds(470, 20, 95, 30);
         panel.add(editCta);
 
         JButton delCta = new JButton("Delete");
-        delCta.setBounds(580, 50, 95, 30);
+        delCta.setBounds(580, 20, 95, 30);
         panel.add(delCta);
 
         String[] countries = new String[] { "india", "australia", "newzealand", "england", "germany", "france",
                 "ireland", "southafrica", "bangladesh", "holland", "america" };
         JComboBox comboBox = new AutoCompleteComboBox(countries);
-        comboBox.setBounds(25, 50, 100, 40);
+        comboBox.setBounds(25, 20, 100, 40);
         panel.add(comboBox, BorderLayout.NORTH);
+
+        JLabel nameSlang = new JLabel("Slang :");
+        JLabel nameDefinition = new JLabel("Definition :");
 
         final JList<String> slangJList = new JList(slangList.toArray());
         final JList<String> definitionJList = new JList(definitionList.toArray());
@@ -50,14 +55,18 @@ public class Menu {
         // slangPanel.setMargin(new Insets(100, 0, 0, 0));
         definitionJList.setLayoutOrientation(JList.VERTICAL);
 
-        slangScrollPane.setBounds(30, 100, 300, 300);
-        definitionScrollPane.setBounds(370, 100, 300, 300);
+        slangScrollPane.setBounds(27, 100, 300, 300);
+        nameSlang.setBounds(27, 72, 100, 20);
+        definitionScrollPane.setBounds(367, 100, 300, 300);
+        nameDefinition.setBounds(367, 72, 100, 20);
 
+        panel.add(nameSlang);
         panel.add(slangScrollPane);
+        panel.add(nameDefinition);
         panel.add(definitionScrollPane);
 
         JButton resetCta = new JButton("Reset");
-        resetCta.setBounds(580, 420, 95, 30);
+        resetCta.setBounds(580, 425, 95, 30);
         panel.add(resetCta);
 
         var fileMenu = new JMenu("Tool");
