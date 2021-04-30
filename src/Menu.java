@@ -37,15 +37,6 @@ public class Menu {
         panel.add(typeWordLabel);
         // ItemChangeTypeSlangListener itemChangeTypeSlang = new
         // ItemChangeTypeSlangListener();
-        cb.addItemListener(new ItemListener() {
-            @Override
-            public void itemStateChanged(ItemEvent event) {
-                if (event.getStateChange() == ItemEvent.SELECTED) {
-                    Object item = event.getItem();
-                    typeWord = item.toString();
-                }
-            }
-        });
 
         JButton addCta = new JButton("Add +");
         addCta.setBounds(360, 20, 95, 30);
@@ -71,7 +62,16 @@ public class Menu {
         // e.printStackTrace();
         // }
 
-        comboBox.updateTypeSearch(typeWord);
+        cb.addItemListener(new ItemListener() {
+            @Override
+            public void itemStateChanged(ItemEvent event) {
+                if (event.getStateChange() == ItemEvent.SELECTED) {
+                    Object item = event.getItem();
+                    typeWord = item.toString();
+                    comboBox.updateTypeSearch(typeWord);
+                }
+            }
+        });
 
         comboBox.setBounds(25, 20, 100, 40);
         panel.add(comboBox, BorderLayout.NORTH);
