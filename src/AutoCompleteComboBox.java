@@ -9,10 +9,12 @@ class AutoCompleteComboBox extends JComboBox {
     public Map<String, String> dataSearch = null;
     public String typeSearch = "Slang";
 
-    public AutoCompleteComboBox(final Object countries[], Map<String, String> data) {
+    public AutoCompleteComboBox(String typeSearchInput, Map<String, String> data) {
+        System.out.println("type comboBox: " + typeSearchInput);
         setEditor(new BasicComboBoxEditor());
         setEditable(true);
         dataSearch = data;
+        typeSearch = typeSearchInput;
     }
 
     public void setSelectedIndex(int index) {
@@ -45,6 +47,8 @@ class AutoCompleteComboBox extends JComboBox {
                         Map<String, String> result = new HashMap<String, String>();
                         if (key == '\n') {
                             callUpdateHistory(text);
+
+                            System.out.println(text + ": " + dataSearch.containsKey(text));
 
                             if (typeSearch == "Slang") {
                                 if (dataSearch.containsKey(text)) {

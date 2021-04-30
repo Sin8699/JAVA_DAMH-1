@@ -5,7 +5,8 @@ public class App {
 
         Map<String, String> values = Slang.TXTImport("src/slang.txt");
 
-        Menu.ShowMenu(values);
+        Menu menu = new Menu();
+        menu.ShowMenu(values);
 
     }
 }

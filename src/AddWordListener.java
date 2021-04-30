@@ -1,14 +1,12 @@
 import java.awt.event.*;
 
-public class ItemChangeTypeSlangListener implements ItemListener {
-    public String value = "Slang";
+public class AddWordListener implements ItemListener {
+    public String value = "";
 
     @Override
     public void itemStateChanged(ItemEvent event) {
         if (event.getStateChange() == ItemEvent.SELECTED) {
             Object item = event.getItem();
-            System.out.println("item :" + item);
-
             value = item.toString();
         }
     }

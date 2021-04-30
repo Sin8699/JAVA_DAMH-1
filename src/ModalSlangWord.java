@@ -1,58 +1,57 @@
-import javax.swing.*;
-import java.awt.*;
-import java.util.Map;
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 import javax.swing.JButton;
 import java.awt.Color;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+import java.awt.event.*;
+
 import javax.swing.JTextField;
 import javax.swing.JLabel;
-import javax.swing.JTextArea;
-import javax.swing.JRadioButton;
-import javax.swing.JToggleButton;
-import javax.swing.JScrollBar;
-import javax.swing.JComboBox;
-import javax.swing.JCheckBox;
 
 public class ModalSlangWord extends JFrame {
 
-    private String valueSlang = "";
-    private String definitionSlang = "";
+    private JTextField SlangJText = null;
+    private JTextField definitionJText = null;
 
-    public ModalSlangWord(String dataSearch, Map<String, String> Result) {
-        setBounds(300, 300, 300, 300);
+    public ModalSlangWord(String typeModal, Menu menu) {
+        setBounds(500, 300, 500, 300);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
-        setLayout(new FlowLayout());
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLayout(null);
+        setTitle(typeModal + " Word");
 
-        JLabel lblPhone = new JLabel("Phone #");
-        lblPhone.setBounds(65, 68, 46, 14);
-        getContentPane().add(lblPhone);
+        JLabel slangLabel = new JLabel("Slang :");
+        slangLabel.setBounds(65, 68, 200, 14);
+        add(slangLabel);
 
-        valueSlang = new JTextField();
-        valueSlang.setBounds(128, 65, 86, 20);
-        getContentPane().add(valueSlang);
-        valueSlang.setColumns(10);
+        SlangJText = new JTextField(100);
+        SlangJText.setBounds(160, 65, 247, 20);
+        add(SlangJText);
 
-        JLabel lblEmailId = new JLabel("Email Id");
-        lblEmailId.setBounds(65, 115, 46, 14);
-        getContentPane().add(lblEmailId);
+        JLabel definitionLabel = new JLabel("Definition :");
+        definitionLabel.setBounds(65, 115, 200, 14);
+        add(definitionLabel);
 
-        definitionSlang = new JTextField();
-        definitionSlang.setBounds(128, 112, 247, 17);
-        getContentPane().add(definitionSlang);
-        definitionSlang.setColumns(10);
+        definitionJText = new JTextField(100);
+        definitionJText.setBounds(160, 112, 247, 17);
 
-        JButton btnSubmit = new JButton("Add");
+        if (typeModal == "Edit") {
+            definitionJText.disable();
+        }
+        add(definitionJText);
 
-        btnSubmit.setBackground(Color.BLUE);
-        btnSubmit.setForeground(Color.MAGENTA);
-        btnSubmit.setBounds(65, 387, 89, 23);
-        getContentPane().add(btnSubmit);
+        JButton btnSubmit = new JButton(typeModal);
+
+        btnSubmit.setForeground(Color.BLUE);
+        btnSubmit.setBounds(200, 230, 95, 30);
+
+        btnSubmit.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                menu.addNewWordToData(SlangJText.getText(), definitionJText.getText());
+                setVisible(false);
+            }
+        });
+
+        add(btnSubmit);
     }
+
 }

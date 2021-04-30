@@ -9,7 +9,6 @@ public class ModalSearch extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
         setLayout(new FlowLayout());
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         final JList<String> slangJList = new JList(Slang.toString(Result));
         JScrollPane slangScrollPane = new JScrollPane();

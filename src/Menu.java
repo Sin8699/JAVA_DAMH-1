@@ -1,29 +1,58 @@
 import javax.swing.*;
 import java.util.*;
 import java.awt.*;
+import java.awt.event.*;
 import java.util.List;
 
 public class Menu {
-    public static void ShowMenu(Map<String, String> data) {
+    private JFrame frame = null;
+    private Map<String, String> dataCurrent = new HashMap<String, String>();
+    private String typeWord = "Slang";
 
-        List<String> slangList = new ArrayList<>(data.keySet());
-        List<String> definitionList = new ArrayList<>(data.values());
+    public void addNewWordToData(String key, String value) {
+        dataCurrent.put(key, value);
+
+    }
+
+    // public void editNewWordToData(String key, String value) {
+    // dataCurrent.put(key, value);
+    // }
+
+    public void ShowMenu(Map<String, String> data) {
+
+        dataCurrent = data;
+
+        List<String> slangList = new ArrayList<>(dataCurrent.keySet());
+        List<String> definitionList = new ArrayList<>(dataCurrent.values());
 
         JPanel panel = new JPanel();
 
-        JLabel typeWord = new JLabel("Search by :", JLabel.CENTER);
+        JLabel typeWordLabel = new JLabel("Search by :", JLabel.CENTER);
         String[] choices = { "Slang", "Definition" };
 
         final JComboBox<String> cb = new JComboBox<String>(choices);
         cb.setBounds(100, 420, 100, 40);
         panel.add(cb);
-        typeWord.setBounds(28, 417, 70, 40);
-        panel.add(typeWord);
-        ItemChangeTypeSlangListener itemChangeTypeSlang = new ItemChangeTypeSlangListener();
-        cb.addItemListener(itemChangeTypeSlang);
+        typeWordLabel.setBounds(28, 417, 70, 40);
+        panel.add(typeWordLabel);
+        // ItemChangeTypeSlangListener itemChangeTypeSlang = new
+        // ItemChangeTypeSlangListener();
+        cb.addItemListener(new ItemListener() {
+            @Override
+            public void itemStateChanged(ItemEvent event) {
+                if (event.getStateChange() == ItemEvent.SELECTED) {
+                    Object item = event.getItem();
+                    typeWord = item.toString();
+                }
+            }
+        });
 
         JButton addCta = new JButton("Add +");
         addCta.setBounds(360, 20, 95, 30);
+        addCta.addActionListener(e -> {
+            new ModalSlangWord("Add", this);
+
+        });
         panel.add(addCta);
 
         JButton editCta = new JButton("Edit");
@@ -34,9 +63,7 @@ public class Menu {
         delCta.setBounds(580, 20, 95, 30);
         panel.add(delCta);
 
-        String[] countries = new String[] { "india", "australia", "newzealand", "england", "germany", "france",
-                "ireland", "southafrica", "bangladesh", "holland", "america" };
-        AutoCompleteComboBox comboBox = new AutoCompleteComboBox(countries, data);
+        AutoCompleteComboBox comboBox = new AutoCompleteComboBox(typeWord, dataCurrent);
         // try {
         // var test = comboBox.tfield.getText(0, comboBox.caretPos);
         // System.out.println("text: " + test);
@@ -44,7 +71,7 @@ public class Menu {
         // e.printStackTrace();
         // }
 
-        comboBox.updateTypeSearch(itemChangeTypeSlang.value);
+        comboBox.updateTypeSearch(typeWord);
 
         comboBox.setBounds(25, 20, 100, 40);
         panel.add(comboBox, BorderLayout.NORTH);
@@ -92,7 +119,7 @@ public class Menu {
 
         panel.add(menuBar);
 
-        JFrame frame = new JFrame("SLANG WORD");
+        frame = new JFrame("SLANG WORD");
 
         panel.setLayout(null);
         frame.add(panel);
@@ -103,4 +130,5 @@ public class Menu {
         frame.setVisible(true);
 
     }
+
 }
