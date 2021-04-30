@@ -48,19 +48,24 @@ class AutoCompleteComboBox extends JComboBox {
                         if (key == '\n') {
                             callUpdateHistory(text);
 
-                            System.out.println(text + ": " + dataSearch.containsKey(text));
+                            System.out.println(typeSearch + " - " + text + ": " + dataSearch.containsValue(text));
 
                             if (typeSearch == "Slang") {
                                 if (dataSearch.containsKey(text)) {
                                     result.put(text, dataSearch.get(text));
                                 } else {
-                                    result = Slang.getKey(dataSearch, text);
+
+                                    try {
+                                        result = Slang.getKey(dataSearch, text);
+                                    } catch (Exception e) {
+                                        System.out.println(e);
+                                    }
                                 }
                             } else {
-                                if (dataSearch.containsValue(text)) {
-                                    result.put(text, dataSearch.get(text));
-                                } else {
+                                try {
                                     result = Slang.getValue(dataSearch, text);
+                                } catch (Exception e) {
+                                    System.out.println(e);
                                 }
                             }
                             System.out.println(result);
