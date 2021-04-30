@@ -1,34 +1,23 @@
-import java.awt.event.ActionEvent;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionListener;
+import java.util.Map;
 
 public class ModalSearch extends JFrame {
 
-    public ModalSearch() {
+    public ModalSearch(String dataSearch, Map<String, String> Result) {
         setBounds(300, 300, 300, 300);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
         setLayout(new FlowLayout());
-        JButton btn = new JButton("TEST");
-        add(btn);
-        btn.addActionListener(new ActionListener() {
 
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                showDialog();
-            }
-        });
-    }
+        final JList<String> slangJList = new JList(Slang.toString(Result));
+        JScrollPane slangScrollPane = new JScrollPane();
+        slangScrollPane.setViewportView(slangJList);
+        slangScrollPane.setLocation(0, 0);
+        slangJList.setLayoutOrientation(JList.VERTICAL);
 
-    private void showDialog() {
+        // add(nameSlang);
+        add(slangScrollPane);
 
-        JDialog dialog = new JDialog(this, Dialog.ModalityType.APPLICATION_MODAL);
-        // OR, you can do the following...
-        // JDialog dialog = new JDialog();
-        // dialog.setModalityType(Dialog.ModalityType.APPLICATION_MODAL);
-
-        dialog.setBounds(350, 350, 200, 200);
-        dialog.setVisible(true);
     }
 }

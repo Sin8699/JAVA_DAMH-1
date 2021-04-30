@@ -19,6 +19,8 @@ public class Menu {
         panel.add(cb);
         typeWord.setBounds(28, 417, 70, 40);
         panel.add(typeWord);
+        ItemChangeTypeSlangListener itemChangeTypeSlang = new ItemChangeTypeSlangListener();
+        cb.addItemListener(itemChangeTypeSlang);
 
         JButton addCta = new JButton("Add +");
         addCta.setBounds(360, 20, 95, 30);
@@ -41,6 +43,8 @@ public class Menu {
         // } catch (javax.swing.text.BadLocationException e) {
         // e.printStackTrace();
         // }
+
+        comboBox.updateTypeSearch(itemChangeTypeSlang.value);
 
         comboBox.setBounds(25, 20, 100, 40);
         panel.add(comboBox, BorderLayout.NORTH);

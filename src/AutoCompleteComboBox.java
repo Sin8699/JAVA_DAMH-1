@@ -7,6 +7,7 @@ class AutoCompleteComboBox extends JComboBox {
     public int caretPos = 0;
     public JTextField tfield = null;
     public Map<String, String> dataSearch = null;
+    public String typeSearch = "Slang";
 
     public AutoCompleteComboBox(final Object countries[], Map<String, String> data) {
         setEditor(new BasicComboBoxEditor());
@@ -36,8 +37,27 @@ class AutoCompleteComboBox extends JComboBox {
 
                     try {
                         text = tfield.getText(0, caretPos);
+                        Map<String, String> result = new HashMap<String, String>();
                         if (key == '\n') {
-                            new ModalSearch();
+                            System.out.println("typeSearch choose :" + typeSearch);
+
+                            if (typeSearch == "Slang") {
+                                if (dataSearch.containsKey(text)) {
+                                    result.put(text, dataSearch.get(text));
+                                } else {
+                                    result = Slang.getKey(dataSearch, text);
+                                }
+                            } else {
+                                if (dataSearch.containsValue(text)) {
+                                    result.put(text, dataSearch.get(text));
+                                } else {
+                                    result = Slang.getValue(dataSearch, text);
+                                }
+                            }
+                            System.out.println(result);
+
+                            new ModalSearch(text, result);
+
                         }
                     } catch (javax.swing.text.BadLocationException e) {
                         e.printStackTrace();
@@ -55,19 +75,7 @@ class AutoCompleteComboBox extends JComboBox {
         }
     }
 
-    public String searchData(Map<String, String> data, String typeSearch) {
-        if (typeSearch == "Slang") {
-            String key = "";
-            try {
-                key = tfield.getText(0, caretPos);
-                String value = data.get(key);
-                return value;
-            } catch (javax.swing.text.BadLocationException e) {
-                e.printStackTrace();
-            }
-
-        }
-
-        return "";
+    public void updateTypeSearch(String typeSearchChoose) {
+        typeSearch = typeSearchChoose;
     }
 }

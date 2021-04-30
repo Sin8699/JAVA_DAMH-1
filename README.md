@@ -30,3 +30,8 @@ dùng, confirm có overwrite hay duplicate ra 1 slang word mới.
 người dùng chọn.
 10. Chức năng đố vui, chương trình hiển thị 1 definition, với 4 slang words đáp án cho
 người dùng chọn.
+
+
+# references
+https://stackabuse.com/search-algorithms-in-java/
+https://www.tutorialspoint.com/how-can-we-implement-auto-complete-jcombobox-in-java
