@@ -20,6 +20,11 @@ class AutoCompleteComboBox extends JComboBox {
         tfield.setText(getItemAt(index).toString());
         tfield.setSelectionEnd(caretPos + tfield.getText().length());
         tfield.moveCaretPosition(caretPos);
+
+    }
+
+    public void callUpdateHistory(String text) {
+        this.addItem(text);
     }
 
     public void setEditor(ComboBoxEditor editor) {
@@ -39,7 +44,7 @@ class AutoCompleteComboBox extends JComboBox {
                         text = tfield.getText(0, caretPos);
                         Map<String, String> result = new HashMap<String, String>();
                         if (key == '\n') {
-                            System.out.println("typeSearch choose :" + typeSearch);
+                            callUpdateHistory(text);
 
                             if (typeSearch == "Slang") {
                                 if (dataSearch.containsKey(text)) {

@@ -34,4 +34,3 @@ người dùng chọn.
 
 # references
 https://stackabuse.com/search-algorithms-in-java/
-https://www.tutorialspoint.com/how-can-we-implement-auto-complete-jcombobox-in-java
