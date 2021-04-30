@@ -37,7 +37,6 @@ public class Slang {
             while ((line = br.readLine()) != null) {
                 String[] arrOfStr = line.split(splitBy);
                 try {
-                    System.out.println(arrOfStr[0] + "Key = " + arrOfStr[1]);
                     data.put(arrOfStr[0], arrOfStr[1]);
 
                 } catch (Exception e) {

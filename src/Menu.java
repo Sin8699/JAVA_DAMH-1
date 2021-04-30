@@ -34,7 +34,14 @@ public class Menu {
 
         String[] countries = new String[] { "india", "australia", "newzealand", "england", "germany", "france",
                 "ireland", "southafrica", "bangladesh", "holland", "america" };
-        JComboBox comboBox = new AutoCompleteComboBox(countries);
+        AutoCompleteComboBox comboBox = new AutoCompleteComboBox(countries, data);
+        // try {
+        // var test = comboBox.tfield.getText(0, comboBox.caretPos);
+        // System.out.println("text: " + test);
+        // } catch (javax.swing.text.BadLocationException e) {
+        // e.printStackTrace();
+        // }
+
         comboBox.setBounds(25, 20, 100, 40);
         panel.add(comboBox, BorderLayout.NORTH);
 

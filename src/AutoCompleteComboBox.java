@@ -1,14 +1,17 @@
 import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.plaf.basic.*;
+import java.util.*;
 
 class AutoCompleteComboBox extends JComboBox {
     public int caretPos = 0;
     public JTextField tfield = null;
+    public Map<String, String> dataSearch = null;
 
-    public AutoCompleteComboBox(final Object countries[]) {
+    public AutoCompleteComboBox(final Object countries[], Map<String, String> data) {
         setEditor(new BasicComboBoxEditor());
         setEditable(true);
+        dataSearch = data;
     }
 
     public void setSelectedIndex(int index) {
@@ -23,8 +26,15 @@ class AutoCompleteComboBox extends JComboBox {
         if (editor.getEditorComponent() instanceof JTextField) {
             tfield = (JTextField) editor.getEditorComponent();
             tfield.addKeyListener(new KeyAdapter() {
-                public void keyReleased(KeyEvent ke) {
-                    char key = ke.getKeyChar();
+                public void keyReleased(KeyEvent event) {
+                    char key = event.getKeyChar();
+
+                    if (key == '\n') {
+                        System.out.println("key: breakline");
+                        System.out.println("Solution: " + dataSearch.get("BBC"));
+
+                    }
+
                     if (!(Character.isLetterOrDigit(key) || Character.isSpaceChar(key)))
                         return;
                     caretPos = tfield.getCaretPosition();
@@ -44,5 +54,21 @@ class AutoCompleteComboBox extends JComboBox {
                 }
             });
         }
+    }
+
+    public String searchData(Map<String, String> data, String typeSearch) {
+        if (typeSearch == "Slang") {
+            String key = "";
+            try {
+                key = tfield.getText(0, caretPos);
+                String value = data.get(key);
+                return value;
+            } catch (javax.swing.text.BadLocationException e) {
+                e.printStackTrace();
+            }
+
+        }
+
+        return "";
     }
 }
