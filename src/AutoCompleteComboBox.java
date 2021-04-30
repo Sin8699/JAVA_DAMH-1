@@ -29,18 +29,16 @@ class AutoCompleteComboBox extends JComboBox {
                 public void keyReleased(KeyEvent event) {
                     char key = event.getKeyChar();
 
-                    if (key == '\n') {
-                        System.out.println("key: breakline");
-                        System.out.println("Solution: " + dataSearch.get("BBC"));
-
-                    }
-
-                    if (!(Character.isLetterOrDigit(key) || Character.isSpaceChar(key)))
-                        return;
+                    // if (!(Character.isLetterOrDigit(key) || Character.isSpaceChar(key)))
+                    // return;
                     caretPos = tfield.getCaretPosition();
                     String text = "";
+
                     try {
                         text = tfield.getText(0, caretPos);
+                        if (key == '\n') {
+                            new ModalSearch();
+                        }
                     } catch (javax.swing.text.BadLocationException e) {
                         e.printStackTrace();
                     }
@@ -51,6 +49,7 @@ class AutoCompleteComboBox extends JComboBox {
                             return;
                         }
                     }
+
                 }
             });
         }
