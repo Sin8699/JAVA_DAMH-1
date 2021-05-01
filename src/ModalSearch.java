@@ -6,7 +6,7 @@ public class ModalSearch extends JFrame {
 
     public ModalSearch(String dataSearch, Map<String, String> Result) {
         setBounds(300, 300, 500, 500);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setVisible(true);
         setLayout(new FlowLayout());
 

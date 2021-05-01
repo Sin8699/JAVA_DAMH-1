@@ -13,7 +13,7 @@ public class ModalSlangWord extends JFrame {
 
     public ModalSlangWord(String typeModal, Menu menu, String key, String value) {
         setBounds(500, 300, 500, 300);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setVisible(true);
         setLayout(null);
         setTitle(typeModal + " Word");
