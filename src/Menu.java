@@ -1,8 +1,8 @@
 import javax.swing.*;
 import java.util.*;
+import java.util.List;
 import java.awt.*;
 import java.awt.event.*;
-import java.util.List;
 
 public class Menu {
     private JFrame frame = null;
@@ -10,7 +10,31 @@ public class Menu {
     private String typeWord = "Slang";
 
     public void addNewWordToData(String key, String value) {
-        dataCurrent.put(key, value);
+        String keyUpper = key.toUpperCase();
+
+        if (dataCurrent.containsKey(keyUpper.toUpperCase())) {
+            int res = ConfirmDialog.UpdateSlangWord();
+
+            if (res == 0) {
+                Random random = new Random();
+
+                int number = random.nextInt(4);
+
+                while (dataCurrent.containsKey(keyUpper + number)) {
+                    number = random.nextInt(4);
+                }
+
+                JOptionPane.showMessageDialog(null, "Key saved with value : " + keyUpper + number);
+                dataCurrent.put(keyUpper + number, value);
+
+            } else if (res == 1) {// overwrite
+                dataCurrent.remove(keyUpper);
+                dataCurrent.put(keyUpper, value);
+                JOptionPane.showMessageDialog(null, "Override slang word successfully");
+            }
+        } else {
+            dataCurrent.put(keyUpper, value);
+        }
 
     }
 
