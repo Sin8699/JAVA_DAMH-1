@@ -43,8 +43,6 @@ public class Menu {
     public void editNewWordToData(String key, String value, String keyOrigin) {
         String keyUpper = key.toUpperCase();
 
-        System.out.println(keyOrigin + " - " + (keyOrigin.toUpperCase()).equals(keyUpper));
-
         if (dataCurrent.containsKey(keyUpper) && !(keyOrigin.toUpperCase()).equals(keyUpper)) {
             int res = ConfirmDialog.UpdateSlangWord();
 
@@ -68,6 +66,19 @@ public class Menu {
         } else {
             dataCurrent.remove(keyUpper);
             dataCurrent.put(keyUpper, value);
+        }
+    }
+
+    public void deleteWord(String key) {
+        String keyUpper = key.toUpperCase();
+
+        int opt = JOptionPane.showConfirmDialog(null, "Slang will be delete, Are you sure ?", "Warning",
+                JOptionPane.OK_CANCEL_OPTION);
+        System.out.println(opt);
+
+        if (opt == 0) {
+            dataCurrent.remove(keyUpper);
+            JOptionPane.showMessageDialog(null, "Delete slang word successfully");
         }
     }
 
@@ -130,6 +141,31 @@ public class Menu {
 
         JButton delCta = new JButton("Delete");
         delCta.setBounds(580, 20, 95, 30);
+        delCta.addActionListener(e -> {
+            String key = null;
+            String value = null;
+
+            if (typeWord == "Slang") {
+                key = slangJList.getSelectedValue();
+                value = dataCurrent.get(key);
+
+                if (key == null) {
+                    JOptionPane.showMessageDialog(null, "Need select slang word to delete");
+                    return;
+                }
+            } else {
+                value = definitionJList.getSelectedValue();
+                key = Slang.findValue(dataCurrent, value);
+
+                if (value == null) {
+                    JOptionPane.showMessageDialog(null, "Need select definition word to delete");
+                    return;
+                }
+            }
+
+            deleteWord(key);
+
+        });
         panel.add(delCta);
 
         AutoCompleteComboBox comboBox = new AutoCompleteComboBox(typeWord, dataCurrent);
