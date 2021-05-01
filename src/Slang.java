@@ -89,4 +89,21 @@ public class Slang {
         }
         return "";
     }
+
+    public static List<String> randomValue(Map<String, String> map, String typeWord) {
+        Iterator iter = map.values().iterator();
+
+        if (typeWord == "Slang") {
+            iter = map.keySet().iterator();
+        }
+
+        List<String> result = new ArrayList<String>();
+
+        while (iter.hasNext() && result.size() < 3) {
+            String value = (String) iter.next();
+            result.add(value);
+        }
+
+        return result;
+    }
 }

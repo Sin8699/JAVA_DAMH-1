@@ -95,7 +95,7 @@ public class Menu {
         String[] choices = { "Slang", "Definition" };
 
         final JComboBox<String> cb = new JComboBox<String>(choices);
-        cb.setBounds(100, 420, 100, 40);
+        cb.setBounds(100, 420, 200, 40);
         panel.add(cb);
         typeWordLabel.setBounds(28, 417, 70, 40);
         panel.add(typeWordLabel);
@@ -230,7 +230,7 @@ public class Menu {
         var fileMenu = new JMenu("Tool");
         var playGameCta = new JMenuItem("Play Game");
         playGameCta.addActionListener(e -> {
-            JOptionPane.showMessageDialog(null, "playGameCta");
+            new ModalGame(typeWord, dataCurrent);
         });
 
         var randomCta = new JMenuItem("Random");
