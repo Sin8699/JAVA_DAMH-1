@@ -219,11 +219,31 @@ public class Menu {
 
         JButton resetCta = new JButton("Reset");
         resetCta.setBounds(580, 425, 95, 30);
+        resetCta.addActionListener(e -> {
+            dataCurrent = Slang.TXTImport("src/slang.txt");
+            System.out.println(dataCurrent.get("tfrm"));
+
+            JOptionPane.showMessageDialog(null, "Reset successfully");
+        });
         panel.add(resetCta);
 
         var fileMenu = new JMenu("Tool");
         var playGameCta = new JMenuItem("Play Game");
+        playGameCta.addActionListener(e -> {
+            JOptionPane.showMessageDialog(null, "playGameCta");
+        });
+
         var randomCta = new JMenuItem("Random");
+        randomCta.addActionListener(e -> {
+            Random random = new Random();
+
+            int index = random.nextInt(dataCurrent.size());
+
+            Object keyRandom = dataCurrent.keySet().toArray()[index];
+            Object valueRadom = dataCurrent.get(keyRandom);
+
+            JOptionPane.showMessageDialog(null, keyRandom + " - " + valueRadom);
+        });
 
         fileMenu.add(playGameCta);
         fileMenu.add(randomCta);
