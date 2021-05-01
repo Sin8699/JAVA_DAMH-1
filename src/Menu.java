@@ -169,12 +169,6 @@ public class Menu {
         panel.add(delCta);
 
         AutoCompleteComboBox comboBox = new AutoCompleteComboBox(typeWord, dataCurrent);
-        // try {
-        // var test = comboBox.tfield.getText(0, comboBox.caretPos);
-        // System.out.println("text: " + test);
-        // } catch (javax.swing.text.BadLocationException e) {
-        // e.printStackTrace();
-        // }
 
         cb.addItemListener(new ItemListener() {
             @Override
@@ -221,7 +215,7 @@ public class Menu {
         resetCta.setBounds(580, 425, 95, 30);
         resetCta.addActionListener(e -> {
             dataCurrent = Slang.TXTImport("src/slang.txt");
-            System.out.println(dataCurrent.get("tfrm"));
+            comboBox.updateData(dataCurrent);
 
             JOptionPane.showMessageDialog(null, "Reset successfully");
         });
@@ -263,6 +257,12 @@ public class Menu {
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
 
+        frame.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+                Slang.TXTExport(dataCurrent, "src/lasted-slang.txt");
+                System.exit(0);
+            }
+        });
     }
-
 }

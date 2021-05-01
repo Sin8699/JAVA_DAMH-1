@@ -92,4 +92,8 @@ class AutoCompleteComboBox extends JComboBox {
     public void updateTypeSearch(String typeSearchChoose) {
         typeSearch = typeSearchChoose;
     }
+
+    public void updateData(Map<String, String> newData) {
+        dataSearch = newData;
+    }
 }
