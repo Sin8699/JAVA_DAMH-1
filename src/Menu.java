@@ -260,7 +260,7 @@ public class Menu {
         frame.addWindowListener(new java.awt.event.WindowAdapter() {
             @Override
             public void windowClosing(java.awt.event.WindowEvent windowEvent) {
-                Slang.TXTExport(dataCurrent, "src/lasted-slang.txt");
+                Slang.TXTExport(dataCurrent, "lasted-slang.txt");
                 System.exit(0);
             }
         });

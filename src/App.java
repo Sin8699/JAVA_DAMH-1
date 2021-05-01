@@ -5,11 +5,11 @@ public class App {
     public static void main(String[] args) throws Exception {
         Map<String, String> values = null;
 
-        File f = new File("src/lasted-slang.txt");
+        File f = new File("lasted-slang.txt");
         if (f.exists() && !f.isDirectory()) {
-            values = Slang.TXTImport("src/lasted-slang.txt");
+            values = Slang.TXTImport("lasted-slang.txt");
         } else {
-            values = Slang.TXTImport("src/slang.txt");
+            values = Slang.TXTImport("slang.txt");
         }
 
         Menu menu = new Menu();
