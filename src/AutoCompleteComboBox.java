@@ -1,6 +1,7 @@
 import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.plaf.basic.*;
+
 import java.util.*;
 
 class AutoCompleteComboBox extends JComboBox {
@@ -10,7 +11,6 @@ class AutoCompleteComboBox extends JComboBox {
     public String typeSearch = "Slang";
 
     public AutoCompleteComboBox(String typeSearchInput, Map<String, String> data) {
-        System.out.println("type comboBox: " + typeSearchInput);
         setEditor(new BasicComboBoxEditor());
         setEditable(true);
         dataSearch = data;
@@ -48,8 +48,6 @@ class AutoCompleteComboBox extends JComboBox {
                         if (key == '\n') {
                             callUpdateHistory(text);
 
-                            System.out.println(typeSearch + " - " + text + ": " + dataSearch.containsValue(text));
-
                             if (typeSearch == "Slang") {
                                 if (dataSearch.containsKey(text)) {
                                     result.put(text, dataSearch.get(text));
@@ -68,7 +66,6 @@ class AutoCompleteComboBox extends JComboBox {
                                     System.out.println(e);
                                 }
                             }
-                            System.out.println(result);
 
                             new ModalSearch(text, result);
 

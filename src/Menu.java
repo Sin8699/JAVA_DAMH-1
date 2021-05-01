@@ -1,4 +1,5 @@
 import javax.swing.*;
+
 import java.util.*;
 import java.util.List;
 import java.awt.*;
@@ -74,7 +75,6 @@ public class Menu {
 
         int opt = JOptionPane.showConfirmDialog(null, "Slang will be delete, Are you sure ?", "Warning",
                 JOptionPane.OK_CANCEL_OPTION);
-        System.out.println(opt);
 
         if (opt == 0) {
             dataCurrent.remove(keyUpper);

@@ -1,3 +1,4 @@
+
 import javax.swing.JFrame;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
@@ -8,7 +9,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-import javax.swing.JTextField;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JRadioButton;
@@ -110,8 +110,6 @@ public class ModalGame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String valueChoose = chooseValue();
-
-                System.out.println(valueChoose + " - " + answer);
 
                 if (valueChoose.equals(answer)) {
                     JOptionPane.showMessageDialog(null, "Correct");
