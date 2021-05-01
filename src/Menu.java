@@ -242,8 +242,12 @@ public class Menu {
         JButton resetCta = new JButton("Reset");
         resetCta.setBounds(580, 425, 95, 30);
         resetCta.addActionListener(e -> {
-            dataCurrent = Slang.TXTImport("src/slang.txt");
+            dataCurrent = Slang.TXTImport("slang.txt");
             comboBox.updateData(dataCurrent);
+
+            // update list
+            slangJList.setListData(Slang.mapToArrayString(dataCurrent, "Slang"));
+            definitionJList.setListData(Slang.mapToArrayString(dataCurrent, "Definition"));
 
             JOptionPane.showMessageDialog(null, "Reset successfully");
         });
