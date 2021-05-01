@@ -106,4 +106,16 @@ public class Slang {
 
         return result;
     }
+
+    public static String[] mapToArrayString(Map<String, String> map, String typeWord) {
+        Object[] list = null;
+
+        if (typeWord == "Slang") {
+            list = map.keySet().toArray();
+        } else {
+            list = map.values().toArray();
+        }
+
+        return Arrays.copyOf(list, list.length, String[].class);
+    }
 }

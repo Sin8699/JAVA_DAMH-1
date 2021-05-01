@@ -30,13 +30,25 @@ public class Menu {
                 JOptionPane.showMessageDialog(null, "Key saved with value : " + keyUpper + number);
                 dataCurrent.put(keyUpper + number, value);
 
+                // update list
+                slangJList.setListData(Slang.mapToArrayString(dataCurrent, "Slang"));
+                definitionJList.setListData(Slang.mapToArrayString(dataCurrent, "Definition"));
+
             } else if (res == 1) {// overwrite
                 dataCurrent.remove(keyUpper);
                 dataCurrent.put(keyUpper, value);
+
+                // update list
+                slangJList.setListData(Slang.mapToArrayString(dataCurrent, "Slang"));
+                definitionJList.setListData(Slang.mapToArrayString(dataCurrent, "Definition"));
                 JOptionPane.showMessageDialog(null, "Override slang word successfully");
             }
         } else {
             dataCurrent.put(keyUpper, value);
+
+            // update list
+            slangJList.setListData(Slang.mapToArrayString(dataCurrent, "Slang"));
+            definitionJList.setListData(Slang.mapToArrayString(dataCurrent, "Definition"));
         }
 
     }
@@ -59,14 +71,26 @@ public class Menu {
                 JOptionPane.showMessageDialog(null, "Key saved with value : " + keyUpper + number);
                 dataCurrent.put(keyUpper + number, value);
 
+                // update list
+                slangJList.setListData(Slang.mapToArrayString(dataCurrent, "Slang"));
+                definitionJList.setListData(Slang.mapToArrayString(dataCurrent, "Definition"));
+
             } else if (res == 1) {// overwrite
                 dataCurrent.remove(keyUpper);
                 dataCurrent.put(keyUpper, value);
+
+                // update list
+                slangJList.setListData(Slang.mapToArrayString(dataCurrent, "Slang"));
+                definitionJList.setListData(Slang.mapToArrayString(dataCurrent, "Definition"));
                 JOptionPane.showMessageDialog(null, "Override slang word successfully");
             }
         } else {
             dataCurrent.remove(keyUpper);
             dataCurrent.put(keyUpper, value);
+
+            // update list
+            slangJList.setListData(Slang.mapToArrayString(dataCurrent, "Slang"));
+            definitionJList.setListData(Slang.mapToArrayString(dataCurrent, "Definition"));
         }
     }
 
@@ -78,6 +102,10 @@ public class Menu {
 
         if (opt == 0) {
             dataCurrent.remove(keyUpper);
+
+            // update list
+            slangJList.setListData(Slang.mapToArrayString(dataCurrent, "Slang"));
+            definitionJList.setListData(Slang.mapToArrayString(dataCurrent, "Definition"));
             JOptionPane.showMessageDialog(null, "Delete slang word successfully");
         }
     }
