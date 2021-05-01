@@ -8,11 +8,13 @@ public class Menu {
     private JFrame frame = null;
     private Map<String, String> dataCurrent = new HashMap<String, String>();
     private String typeWord = "Slang";
+    private JList<String> slangJList = null;
+    private JList<String> definitionJList = null;
 
     public void addNewWordToData(String key, String value) {
         String keyUpper = key.toUpperCase();
 
-        if (dataCurrent.containsKey(keyUpper.toUpperCase())) {
+        if (dataCurrent.containsKey(keyUpper)) {
             int res = ConfirmDialog.UpdateSlangWord();
 
             if (res == 0) {
@@ -38,9 +40,36 @@ public class Menu {
 
     }
 
-    // public void editNewWordToData(String key, String value) {
-    // dataCurrent.put(key, value);
-    // }
+    public void editNewWordToData(String key, String value) {
+        String keyUpper = key.toUpperCase();
+
+        System.out.println(slangJList.getSelectedValue());
+
+        if (dataCurrent.containsKey(keyUpper)) {
+            int res = ConfirmDialog.UpdateSlangWord();
+
+            if (res == 0) {
+                Random random = new Random();
+
+                int number = random.nextInt(4);
+
+                while (dataCurrent.containsKey(keyUpper + number)) {
+                    number = random.nextInt(4);
+                }
+
+                JOptionPane.showMessageDialog(null, "Key saved with value : " + keyUpper + number);
+                dataCurrent.put(keyUpper + number, value);
+
+            } else if (res == 1) {// overwrite
+                dataCurrent.remove(keyUpper);
+                dataCurrent.put(keyUpper, value);
+                JOptionPane.showMessageDialog(null, "Override slang word successfully");
+            }
+        } else {
+            dataCurrent.remove(keyUpper);
+            dataCurrent.put(keyUpper, value);
+        }
+    }
 
     public void ShowMenu(Map<String, String> data) {
 
@@ -65,13 +94,20 @@ public class Menu {
         JButton addCta = new JButton("Add +");
         addCta.setBounds(360, 20, 95, 30);
         addCta.addActionListener(e -> {
-            new ModalSlangWord("Add", this);
+            new ModalSlangWord("Add", this, "", "");
 
         });
         panel.add(addCta);
 
         JButton editCta = new JButton("Edit");
         editCta.setBounds(470, 20, 95, 30);
+        editCta.addActionListener(e -> {
+            String key = slangJList.getSelectedValue();
+            String value = definitionJList.getSelectedValue();
+
+            new ModalSlangWord("Edit", this, key, value);
+
+        });
         panel.add(editCta);
 
         JButton delCta = new JButton("Delete");
@@ -103,8 +139,8 @@ public class Menu {
         JLabel nameSlang = new JLabel("Slang :");
         JLabel nameDefinition = new JLabel("Definition :");
 
-        final JList<String> slangJList = new JList(slangList.toArray());
-        final JList<String> definitionJList = new JList(definitionList.toArray());
+        slangJList = new JList(slangList.toArray());
+        definitionJList = new JList(definitionList.toArray());
 
         JScrollPane slangScrollPane = new JScrollPane();
         JScrollPane definitionScrollPane = new JScrollPane();

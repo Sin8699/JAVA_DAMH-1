@@ -8,10 +8,10 @@ import javax.swing.JLabel;
 
 public class ModalSlangWord extends JFrame {
 
-    private JTextField SlangJText = null;
+    private JTextField slangJText = null;
     private JTextField definitionJText = null;
 
-    public ModalSlangWord(String typeModal, Menu menu) {
+    public ModalSlangWord(String typeModal, Menu menu, String key, String value) {
         setBounds(500, 300, 500, 300);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
@@ -22,9 +22,9 @@ public class ModalSlangWord extends JFrame {
         slangLabel.setBounds(65, 68, 200, 14);
         add(slangLabel);
 
-        SlangJText = new JTextField(100);
-        SlangJText.setBounds(160, 65, 247, 20);
-        add(SlangJText);
+        slangJText = new JTextField(100);
+        slangJText.setBounds(160, 65, 247, 20);
+        add(slangJText);
 
         JLabel definitionLabel = new JLabel("Definition :");
         definitionLabel.setBounds(65, 115, 200, 14);
@@ -34,7 +34,8 @@ public class ModalSlangWord extends JFrame {
         definitionJText.setBounds(160, 112, 247, 17);
 
         if (typeModal == "Edit") {
-            definitionJText.disable();
+            slangJText.setText(key);
+            definitionJText.setText(value);
         }
         add(definitionJText);
 
@@ -46,7 +47,11 @@ public class ModalSlangWord extends JFrame {
         btnSubmit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                menu.addNewWordToData(SlangJText.getText(), definitionJText.getText());
+                if (typeModal == "Edit") {
+                    menu.editNewWordToData(slangJText.getText(), definitionJText.getText());
+                } else {
+                    menu.addNewWordToData(slangJText.getText(), definitionJText.getText());
+                }
                 setVisible(false);
             }
         });
