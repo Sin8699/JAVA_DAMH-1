@@ -80,4 +80,13 @@ public class Slang {
 
         return textList.toArray();
     }
+
+    public static String findValue(Map<String, String> map, String key) {
+        for (Entry<String, String> entry : map.entrySet()) {
+            if ((entry.getValue().toUpperCase()).contains(key.toUpperCase())) {
+                return entry.getKey();
+            }
+        }
+        return "";
+    }
 }

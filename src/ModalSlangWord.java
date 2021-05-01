@@ -48,7 +48,7 @@ public class ModalSlangWord extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (typeModal == "Edit") {
-                    menu.editNewWordToData(slangJText.getText(), definitionJText.getText());
+                    menu.editNewWordToData(slangJText.getText(), definitionJText.getText(), key);
                 } else {
                     menu.addNewWordToData(slangJText.getText(), definitionJText.getText());
                 }

@@ -40,12 +40,12 @@ public class Menu {
 
     }
 
-    public void editNewWordToData(String key, String value) {
+    public void editNewWordToData(String key, String value, String keyOrigin) {
         String keyUpper = key.toUpperCase();
 
-        System.out.println(slangJList.getSelectedValue());
+        System.out.println(keyOrigin + " - " + (keyOrigin.toUpperCase()).equals(keyUpper));
 
-        if (dataCurrent.containsKey(keyUpper)) {
+        if (dataCurrent.containsKey(keyUpper) && !(keyOrigin.toUpperCase()).equals(keyUpper)) {
             int res = ConfirmDialog.UpdateSlangWord();
 
             if (res == 0) {
@@ -102,8 +102,26 @@ public class Menu {
         JButton editCta = new JButton("Edit");
         editCta.setBounds(470, 20, 95, 30);
         editCta.addActionListener(e -> {
-            String key = slangJList.getSelectedValue();
-            String value = definitionJList.getSelectedValue();
+            String key = null;
+            String value = null;
+
+            if (typeWord == "Slang") {
+                key = slangJList.getSelectedValue();
+                value = dataCurrent.get(key);
+
+                if (key == null) {
+                    JOptionPane.showMessageDialog(null, "Need select slang word to edit");
+                    return;
+                }
+            } else {
+                value = definitionJList.getSelectedValue();
+                key = Slang.findValue(dataCurrent, value);
+
+                if (value == null) {
+                    JOptionPane.showMessageDialog(null, "Need select definition word to edit");
+                    return;
+                }
+            }
 
             new ModalSlangWord("Edit", this, key, value);
 
